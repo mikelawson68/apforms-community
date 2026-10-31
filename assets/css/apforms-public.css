@@ -1,0 +1,258 @@
+/* ─── apForms Public Styles ──────────────────────────────────────────────────
+   Uses CSS custom properties defined in portal/portal.css (portal context) or
+   falls back to sensible hardcoded values for standalone WordPress page use.
+   Dark mode is default; light via html[data-theme="light"] from portal toggle.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* ── Fallback variables (standalone WP page — no portal.css loaded) ───────── */
+:root {
+    --apf-bg:           var(--apf-bg,           #fff);
+    --apf-bg-card:      var(--apf-bg-card,       #fff);
+    --apf-bg-input:     var(--apf-bg-input,      #fff);
+    --apf-text:         var(--apf-text,          #1e1e1e);
+    --apf-text-muted:   var(--apf-text-muted,    #555);
+    --apf-text-label:   var(--apf-text-label,    #1e1e1e);
+    --apf-border:       var(--apf-border,        #e0e0e0);
+    --apf-border-input: var(--apf-border-input,  #c9cdd2);
+    --apf-border-focus: var(--apf-border-focus,  #0073aa);
+    --apf-accent:       var(--apf-accent,        #0073aa);
+    --apf-accent-hover: var(--apf-accent-hover,  #005a87);
+    --apf-accent-text:  var(--apf-accent-text,   #fff);
+    --apf-danger:       var(--apf-danger,        #d63638);
+    --apf-radius:       var(--apf-radius,        8px);
+    --apf-radius-sm:    var(--apf-radius-sm,     4px);
+    --apf-shadow:       var(--apf-shadow,        0 2px 12px rgba(0,0,0,0.08));
+
+    /* notice tokens */
+    --apf-notice-error-bg:       var(--apf-notice-error-bg,       #fdf0ef);
+    --apf-notice-error-border:   var(--apf-notice-error-border,   #f5c5c5);
+    --apf-notice-error-text:     var(--apf-notice-error-text,     #b32d2e);
+    --apf-notice-success-bg:     var(--apf-notice-success-bg,     #f0fdf4);
+    --apf-notice-success-border: var(--apf-notice-success-border, #86efac);
+    --apf-notice-success-text:   var(--apf-notice-success-text,   #166534);
+}
+
+/* ── Form wrap ────────────────────────────────────────────────────────────── */
+.apf-form-wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    color: var(--apf-text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.apf-form-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--apf-text);
+}
+
+.apf-form-description {
+    color: var(--apf-text-muted);
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+
+/* ── Error summary banner ────────────────────────────────────────────────── */
+.apf-error-summary {
+    background: var(--apf-notice-error-bg);
+    border: 1px solid var(--apf-notice-error-border);
+    border-left: 4px solid var(--apf-danger);
+    border-radius: var(--apf-radius-sm);
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    color: var(--apf-notice-error-text);
+    font-size: 14px;
+}
+.apf-error-summary strong {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--apf-danger);
+}
+.apf-error-summary ul  { margin: 6px 0 0 18px; }
+.apf-error-summary ul li { margin-bottom: 2px; }
+
+/* ── Confirmation message ────────────────────────────────────────────────── */
+.apf-confirmation {
+    background: var(--apf-notice-success-bg);
+    border: 1px solid var(--apf-notice-success-border);
+    border-left: 4px solid var(--apf-accent);
+    border-radius: var(--apf-radius-sm);
+    padding: 20px 24px;
+    color: var(--apf-notice-success-text);
+    font-size: 15px;
+}
+
+/* ── Form layout ─────────────────────────────────────────────────────────── */
+.apf-form { display: flex; flex-direction: column; gap: 18px; }
+
+/* ── Field wrapper ───────────────────────────────────────────────────────── */
+.apf-field { display: flex; flex-direction: column; gap: 5px; }
+
+.apf-field.apf-has-error .apf-input,
+.apf-field.apf-has-error .apf-textarea,
+.apf-field.apf-has-error .apf-select {
+    border-color: var(--apf-danger);
+    box-shadow: 0 0 0 2px rgba(214, 54, 56, 0.15);
+}
+
+/* ── Label ───────────────────────────────────────────────────────────────── */
+.apf-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--apf-text-label);
+    display: block;
+}
+.apf-required { color: var(--apf-danger); margin-left: 2px; }
+
+/* ── Description ─────────────────────────────────────────────────────────── */
+.apf-field-desc { font-size: 13px; color: var(--apf-text-muted); margin: 0; }
+
+/* ── Field error ─────────────────────────────────────────────────────────── */
+.apf-field-error {
+    font-size: 13px;
+    color: var(--apf-danger);
+    font-weight: 500;
+}
+
+/* ── Standard inputs ─────────────────────────────────────────────────────── */
+.apf-input,
+.apf-textarea,
+.apf-select {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid var(--apf-border-input);
+    border-radius: var(--apf-radius-sm);
+    font-size: 15px;
+    color: var(--apf-text);
+    background: var(--apf-bg-input);
+    box-sizing: border-box;
+    transition: border-color .15s, box-shadow .15s;
+    font-family: inherit;
+}
+.apf-input:focus,
+.apf-textarea:focus,
+.apf-select:focus {
+    border-color: var(--apf-border-focus);
+    box-shadow: 0 0 0 3px rgba(0, 115, 170, 0.18);
+    outline: none;
+}
+.apf-input::placeholder,
+.apf-textarea::placeholder { color: var(--apf-text-muted); opacity: 0.7; }
+.apf-textarea { resize: vertical; min-height: 100px; }
+
+/* Select chevron — needs both light & dark SVG versions */
+.apf-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23999' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
+}
+html[data-theme="light"] .apf-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23666' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+}
+
+/* ── Radio / Checkbox groups ─────────────────────────────────────────────── */
+.apf-radio-group,
+.apf-checkbox-group { display: flex; flex-direction: column; gap: 8px; }
+
+.apf-choice-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--apf-text);
+}
+.apf-choice-label input[type="radio"],
+.apf-choice-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--apf-accent);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* ── Name field ──────────────────────────────────────────────────────────── */
+.apf-name-group { display: flex; gap: 10px; flex-wrap: wrap; }
+.apf-name-group .apf-input { flex: 1; min-width: 120px; }
+.apf-name-prefix { max-width: 100px; flex: 0 0 100px; }
+
+/* ── File upload ─────────────────────────────────────────────────────────── */
+.apf-file {
+    border: 2px dashed var(--apf-border-input);
+    border-radius: var(--apf-radius-sm);
+    padding: 12px;
+    background: var(--apf-bg-input);
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    color: var(--apf-text);
+    transition: border-color .15s, background .15s;
+}
+.apf-file:hover {
+    border-color: var(--apf-border-focus);
+    background: var(--apf-bg-hover, rgba(0,115,170,0.06));
+}
+.apf-file-hint { font-size: 12px; color: var(--apf-text-muted); }
+.apf-file-preview { margin-top: 8px; display: flex; flex-direction: column; gap: 4px; }
+.apf-file-preview-item {
+    font-size: 13px;
+    color: var(--apf-text-muted);
+    padding: 4px 8px;
+    background: var(--apf-bg-hover, rgba(255,255,255,0.06));
+    border-radius: 3px;
+}
+
+/* ── Section break ───────────────────────────────────────────────────────── */
+.apf-section-break {
+    border-top: 2px solid var(--apf-border);
+    padding-top: 14px;
+    margin-top: 6px;
+}
+.apf-section-title {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0 0 4px;
+    color: var(--apf-text);
+}
+.apf-section-desc { color: var(--apf-text-muted); font-size: 14px; margin: 0; }
+
+/* ── HTML block ──────────────────────────────────────────────────────────── */
+.apf-html-block { font-size: 14px; color: var(--apf-text-muted); }
+.apf-html-block a { color: var(--apf-text-link, var(--apf-accent)); }
+
+/* ── Submit row ──────────────────────────────────────────────────────────── */
+.apf-submit-row { margin-top: 6px; }
+.apf-submit-btn {
+    display: inline-block;
+    padding: 11px 28px;
+    background: var(--apf-accent);
+    color: var(--apf-accent-text);
+    border: none;
+    border-radius: var(--apf-radius-sm);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s, transform .1s;
+    font-family: inherit;
+}
+.apf-submit-btn:hover   { background: var(--apf-accent-hover); }
+.apf-submit-btn:active  { transform: translateY(1px); }
+.apf-submit-btn:disabled {
+    background: var(--apf-text-muted);
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ── Honeypot — must stay invisible ─────────────────────────────────────── */
+.apf-hp { display: none !important; position: absolute !important; left: -9999px !important; }
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .apf-form { gap: 14px; }
+    .apf-input, .apf-textarea, .apf-select { font-size: 16px; } /* prevent iOS zoom */
+    .apf-name-group { flex-direction: column; }
+    .apf-name-prefix { max-width: none; flex: none; }
+}
